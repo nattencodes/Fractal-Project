@@ -1,5 +1,4 @@
 module com.example.fractal {
-    requires javafx.controls;
     requires javafx.fxml;
 
 

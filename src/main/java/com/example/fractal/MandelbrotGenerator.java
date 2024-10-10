@@ -21,7 +21,7 @@ public class MandelbrotGenerator {
             for (int x = -((int) left); x < 200; x++) {
                 for (int y = -200; y < 200; y++) {
                     if (checkConvergence(x/zoom, y/zoom, 100) == 100) {
-                        pw.setColor(x+((int) left), y+200, Color.BISQUE);
+                        pw.setColor(x+((int) left), y+200, Color.HOTPINK);
                     }
                 }
             }

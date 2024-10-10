@@ -6,7 +6,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
-        public Group start() {
+        public Group create() {
             Group root = new Group();
             Canvas canvas = new Canvas(400, 400);
             PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();

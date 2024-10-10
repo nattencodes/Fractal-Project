@@ -1,6 +1,6 @@
 module com.example.fractal {
     requires javafx.fxml;
-    requires javafx.graphics;
+    requires javafx.controls;
 
 
     opens com.example.fractal to javafx.fxml;

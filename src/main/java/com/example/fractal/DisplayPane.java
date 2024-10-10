@@ -9,7 +9,7 @@ import java.util.Objects;
 public class DisplayPane {
     public VBox displayThePain() {
         VBox displayPane = new VBox();
-        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fractal.png")));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/src/tempimage.png")));
 
         Button button = new Button("download");
         button.setLayoutX(100);

@@ -1,8 +1,13 @@
 package com.example.fractal;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
-public class DisplayPane extends Application {
-    public void start(Stage primaryStage) {}
+import java.util.Objects;
+
+public class DisplayPane {
+    public VBox displayThePain() {
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/fractal.png")));
+        
+    }
 }

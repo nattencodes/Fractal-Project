@@ -3,16 +3,21 @@ package com.example.fractal;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
         public Group create() {
-            Group root = new Group();
+            StackPane rootPane = new StackPane();
+            rootPane.setStyle("-fx-background-color: green");
+            Group root = new Group(rootPane);
+
             Canvas canvas = new Canvas(400, 400);
             PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
 
             drawSet(pw, 200, 300, 200);
-            root.getChildren().add(canvas);
+            rootPane.getChildren().add(canvas);
 
             return root;
         }

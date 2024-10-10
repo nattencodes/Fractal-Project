@@ -1,7 +1,10 @@
 package com.example.fractal;
 
-public class Main {
-    public static void main(String[] args) {
-        System.out.print("test");
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+    public void start(Stage primaryStage) {
+
     }
 }

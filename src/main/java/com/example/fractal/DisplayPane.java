@@ -12,7 +12,6 @@ import java.util.Objects;
 public class DisplayPane {
     public VBox displayThePain() {
         VBox displayPane = new VBox();
-        //Image image = new Image(Objects.requireNonNull(getClass(.getResourceAsStream("/images/tempimage.png")));
 
         MandelbrotGenerator generator = new MandelbrotGenerator();
         Group mandelbread = generator.create();

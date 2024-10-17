@@ -1,5 +1,7 @@
 package com.example.fractal;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,6 +34,11 @@ public class ParameterPane {
         slider1.setMax(300);
         slider1.setValue(50);
         parameterPane.getChildren().add(slider1);
+
+        final int[] iterationValue = {200};
+        slider1.setValue(iterationValue[0]);
+        slider1.valueProperty().addListener(e -> iterationValue[0] = (int) slider1.getValue());
+        slider1.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);

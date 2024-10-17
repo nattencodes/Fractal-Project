@@ -19,7 +19,7 @@ public class Main extends Application {
         HBox pains = new HBox(parameterPane.displayParamPane(), displayPane.displayThePain());
         vbox1.getChildren().addAll(pains);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("aHHHHHHHHHH GET ME OUT OF HERE");
+        primaryStage.setTitle("Fractal Generator");
         primaryStage.show();
     }
 }

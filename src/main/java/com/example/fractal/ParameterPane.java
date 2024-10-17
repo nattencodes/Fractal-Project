@@ -46,16 +46,11 @@ public class ParameterPane {
         parameterPane.setSpacing(10);
         parameterPane.setPadding(new Insets(10, 10, 10, 10));
 
-        Button button = new Button("Generate");
-        button.setLayoutX(100);
-        button.setLayoutY(300);
-        new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("sorry");
-            }
-        };
-        parameterPane.getChildren().add(button);
+        Button generateButton = new Button("Generate");
+        generateButton.setLayoutX(100);
+        generateButton.setLayoutY(300);
+        generateButton.setOnAction(e -> System.out.println("MIAW"));
+        parameterPane.getChildren().add(generateButton);
 
         return parameterPane;
     }

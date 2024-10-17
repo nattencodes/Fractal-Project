@@ -16,7 +16,7 @@ public class Main extends Application {
         //DisplayPane displayPane = new DisplayPane();
         //vbox1.getChildren().add(displayPane.displayThePain());
         ParameterPane parameterPane = new ParameterPane();
-        //vbox1.getChildren().add(parameterPane.displayParamPane());
+        vbox1.getChildren().add(parameterPane.displayParamPane());
         primaryStage.setScene(scene);
         primaryStage.setTitle("aHHHHHHHHHH GET ME OUT OF HERE");
         primaryStage.show();

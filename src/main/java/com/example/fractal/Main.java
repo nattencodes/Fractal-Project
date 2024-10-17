@@ -11,9 +11,12 @@ public class Main extends Application {
         Scene scene = new Scene(vbox1);
 
         javafx.scene.control.MenuBar menuBar = new MenuBar().make();
-        DisplayPane displayPane = new DisplayPane();
 
-        vbox1.getChildren().addAll(menuBar, displayPane.displayThePain());
+        vbox1.getChildren().addAll(menuBar);
+        //DisplayPane displayPane = new DisplayPane();
+        //vbox1.getChildren().add(displayPane.displayThePain());
+        ParameterPane parameterPane = new ParameterPane();
+        //vbox1.getChildren().add(parameterPane.displayParamPane());
         primaryStage.setScene(scene);
         primaryStage.setTitle("aHHHHHHHHHH GET ME OUT OF HERE");
         primaryStage.show();

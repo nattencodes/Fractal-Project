@@ -33,7 +33,7 @@ public class ParameterPane {
         slider1.setValue(50);
         parameterPane.getChildren().add(slider1);
 
-        Label slider2title = new Label("Weirdness factor");
+        Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);
 
         Slider slider2 = new Slider();

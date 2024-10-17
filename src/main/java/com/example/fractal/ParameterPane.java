@@ -26,6 +26,13 @@ public class ParameterPane {
         title.setAlignment(Pos.TOP_LEFT);
         parameterPane.getChildren().add(title);
 
+        Label whatsThis = new Label("What is a Mandelbrot Set Fractal?");
+        whatsThis.setStyle("-fx-underline: true;");
+        whatsThis.setOnMouseClicked(event -> {
+            System.out.println("maw");
+        });
+        parameterPane.getChildren().add(whatsThis);
+
         Label slider1title = new Label("Iterations");
         parameterPane.getChildren().add(slider1title);
 

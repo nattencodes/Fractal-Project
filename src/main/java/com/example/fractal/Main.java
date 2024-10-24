@@ -1,6 +1,7 @@
 package com.example.fractal;
 
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,12 +12,15 @@ public class Main extends Application {
         VBox vbox1 = new VBox();
         Scene scene = new Scene(vbox1);
 
+        MandelbrotGenerator generator = new MandelbrotGenerator();
+        Group mandelbrot = generator.create();
+
         javafx.scene.control.MenuBar menuBar = new MenuBar().make();
 
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();
         ParameterPane parameterPane = new ParameterPane();
-        HBox pains = new HBox(parameterPane.displayParamPane(), displayPane.displayThePain());
+        HBox pains = new HBox(parameterPane.displayParamPane(), displayPane.displayThePain(mandelbrot));
         vbox1.getChildren().addAll(pains);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fractal Generator");

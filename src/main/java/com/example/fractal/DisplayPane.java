@@ -10,13 +10,11 @@ import javafx.scene.layout.VBox;
 import java.util.Objects;
 
 public class DisplayPane {
-    public VBox displayThePain() {
+    public VBox displayThePain(Group mandelbrot) {
         VBox displayPane = new VBox();
 
-        MandelbrotGenerator generator = new MandelbrotGenerator();
-        Group mandelbread = generator.create();
 
-        displayPane.getChildren().add(mandelbread);
+        displayPane.getChildren().add(mandelbrot);
         displayPane.setAlignment(Pos.CENTER);
         displayPane.setSpacing(10);
         displayPane.setPadding(new Insets(10, 10, 10, 10));

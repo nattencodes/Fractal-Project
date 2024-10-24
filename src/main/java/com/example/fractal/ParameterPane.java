@@ -24,13 +24,16 @@ public class ParameterPane {
         whatsThis.setOnMouseClicked(event -> {
             Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
             codeDialog.setTitle("Information on Fractals");
-            codeDialog.setHeight(300);
+            codeDialog.setHeight(350);
             codeDialog.setWidth(500);
             codeDialog.setHeaderText(textClick);
             codeDialog.setContentText(
                     """
-                            A mandelbrot fractal is a fractal made of the mandelbrot set.\s
-                            When it is mathematically visualised in a 2D coordinate plane, \s"""
+                            The Mandelbrot set is a specific fractal formed by iterating a simple equation: starting with a complex number, repeatedly squaring it and adding the original number.
+                            If the result stays within a fixed boundary, the number is part of the set; otherwise, it’s excluded.
+                            Visually, the Mandelbrot set has a central, bulb-like shape with smaller, connected "buds" and intricate, infinitely complex patterns along its edge.
+                            Each point on the boundary shows self-similarity, meaning you can zoom in forever, always finding new, smaller versions of the shape.
+                            Its distinctive shape is iconic in fractal mathematics and chaos theory."""
             );
             codeDialog.show();
         });

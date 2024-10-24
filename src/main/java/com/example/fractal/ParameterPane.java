@@ -8,6 +8,16 @@ import javafx.scene.layout.VBox;
 public class ParameterPane {
     final int[] iterationValue = {200};
 
+    Slider slider;
+
+    private void setSlider(Slider slider) {
+        this.slider = slider;
+    }
+
+    public Slider getSlider() {
+        return slider;
+    }
+
     public VBox displayParamPane() {
         VBox parameterPane = new VBox();
         parameterPane.setStyle("-fx-padding: 50;");
@@ -47,10 +57,9 @@ public class ParameterPane {
         iterationSlider.setMax(300);
         iterationSlider.setValue(50);
         parameterPane.getChildren().add(iterationSlider);
+        setSlider(iterationSlider);
 
         iterationSlider.setValue(iterationValue[0]);
-        iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
-        iterationSlider.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);

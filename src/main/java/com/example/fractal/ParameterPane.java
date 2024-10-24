@@ -1,5 +1,7 @@
 package com.example.fractal;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ParameterPane {
+    final int[] iterationValue = {200};
+
     public VBox displayParamPane() {
         VBox parameterPane = new VBox();
         parameterPane.setStyle("-fx-padding: 50;");
@@ -46,11 +50,15 @@ public class ParameterPane {
         Label slider1title = new Label("Iterations");
         parameterPane.getChildren().add(slider1title);
 
-        Slider slider1 = new Slider();
-        slider1.setMin(0);
-        slider1.setMax(300);
-        slider1.setValue(50);
-        parameterPane.getChildren().add(slider1);
+        Slider iterationSlider = new Slider();
+        iterationSlider.setMin(0);
+        iterationSlider.setMax(300);
+        iterationSlider.setValue(50);
+        parameterPane.getChildren().add(iterationSlider);
+
+        iterationSlider.setValue(iterationValue[0]);
+        iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
+        iterationSlider.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);
@@ -72,5 +80,9 @@ public class ParameterPane {
         parameterPane.getChildren().add(generateButton);
 
         return parameterPane;
+    }
+
+    public int getIteration() {
+        return iterationValue[0];
     }
 }

@@ -22,10 +22,9 @@ public class MenuBar {
         options.getItems().addAll(settings, theme);
 
         Menu help = new Menu("Help");
-        MenuItem whatIsFractal = new MenuItem("What is a Fractal?");
         MenuItem sendFeedback = new MenuItem("Send Feedback");
         MenuItem guide = new MenuItem("Guide");
-        help.getItems().addAll(whatIsFractal, sendFeedback, guide);
+        help.getItems().addAll(guide, sendFeedback);
 
         menuBar.getMenus().addAll(file, options, help);
         return menuBar;

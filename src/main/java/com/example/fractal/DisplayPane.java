@@ -11,12 +11,16 @@ public class DisplayPane {
     public VBox displayThePain(MandelbrotGenerator mandelbrotGenerator, Slider iterationSlider) {
         VBox displayPane = new VBox();
 
-        Group mandelbrot = mandelbrotGenerator.create();
         int[] iterationValue = new int[]{200};
-        iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
-        iterationSlider.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
 
-        displayPane.getChildren().add(mandelbrot);
+        final Group[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0])};
+        iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
+        iterationSlider.setOnMouseReleased(e ->
+            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
+            System.out.println(iterationValue[0]);
+            displayPane.getChildren().set(0, mandelbrot[0]);});
+
+        displayPane.getChildren().add(mandelbrot[0]);
         displayPane.setAlignment(Pos.CENTER);
         displayPane.setSpacing(10);
         displayPane.setPadding(new Insets(10, 10, 10, 10));

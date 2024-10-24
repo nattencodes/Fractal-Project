@@ -24,10 +24,22 @@ public class ParameterPane {
         title.setAlignment(Pos.TOP_LEFT);
         parameterPane.getChildren().add(title);
 
-        Label whatsThis = new Label("What is a Mandelbrot Set Fractal?");
+        String textClick = "What is a Mandelbrot Fractal?";
+
+        Label whatsThis = new Label(textClick);
         whatsThis.setStyle("-fx-underline: true;");
         whatsThis.setOnMouseClicked(event -> {
-            System.out.println("maw");
+            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
+            codeDialog.setTitle("Information on Fractals");
+            codeDialog.setHeight(300);
+            codeDialog.setWidth(500);
+            codeDialog.setHeaderText(textClick);
+            codeDialog.setContentText(
+                    """
+                            A mandelbrot fractal is a fractal made of the mandelbrot set.\s
+                            When it is mathematically visualised in a 2D coordinate plane, \s"""
+            );
+            codeDialog.show();
         });
         parameterPane.getChildren().add(whatsThis);
 

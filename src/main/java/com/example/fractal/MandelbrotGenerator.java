@@ -51,4 +51,8 @@ public class MandelbrotGenerator {
         }
         return iterations;
     }
+
+    public void update() {
+
+    }
 }

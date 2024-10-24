@@ -7,10 +7,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
-    int iteration = 200;
+    int iterations = 200;
 
-    public void setIteration(int iteration) {
-        this.iteration = iteration;
+    public void setIterations(int iterations) {
+        this.iterations = iterations;
     }
 
     public Group create() {
@@ -30,17 +30,17 @@ public class MandelbrotGenerator {
     public void drawSet(PixelWriter pw, double zoom, double left, double right) {
         for (int x = -((int) left); x < 200; x++) {
             for (int y = -200; y < 200; y++) {
-                if (checkConvergence(x / zoom, y / zoom, 200) == 200) {
+                if (checkConvergence(x / zoom, y / zoom) == 200) {
                     pw.setColor(x + ((int) left), y + 200, Color.HOTPINK);
                 }
             }
         }
     }
 
-    public int checkConvergence(double x, double y, int iterations) {
+    public int checkConvergence(double x, double y) {
         double z = 0;
         double zi = 0;
-        for (int i = 0; i < iterations; i++) {
+        for (int i = 0; i < this.iterations; i++) {
             double z2 = z * z - (zi * zi);
             double zi2 = 2 * (z * zi);
             z = z2 + x;

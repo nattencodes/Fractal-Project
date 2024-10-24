@@ -13,14 +13,13 @@ public class Main extends Application {
         Scene scene = new Scene(vbox1);
 
         MandelbrotGenerator generator = new MandelbrotGenerator();
-        Group mandelbrot = generator.create();
 
         javafx.scene.control.MenuBar menuBar = new MenuBar().make();
 
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();
         ParameterPane parameterPane = new ParameterPane();
-        HBox pains = new HBox(parameterPane.displayParamPane(), displayPane.displayThePain(mandelbrot));
+        HBox pains = new HBox(parameterPane.displayParamPane(generator), displayPane.displayThePain(generator));
         vbox1.getChildren().addAll(pains);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fractal Generator");

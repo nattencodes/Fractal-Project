@@ -4,15 +4,13 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
-
 public class DisplayPane {
-    public VBox displayThePain(Group mandelbrot) {
+    public VBox displayThePain(MandelbrotGenerator mandelbrotGenerator) {
         VBox displayPane = new VBox();
 
+        Group mandelbrot = mandelbrotGenerator.create();
 
         displayPane.getChildren().add(mandelbrot);
         displayPane.setAlignment(Pos.CENTER);

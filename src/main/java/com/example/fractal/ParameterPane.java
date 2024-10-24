@@ -1,27 +1,16 @@
 package com.example.fractal;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class ParameterPane {
     final int[] iterationValue = {200};
 
-    public VBox displayParamPane() {
+    public VBox displayParamPane(MandelbrotGenerator mandelbrotGenerator) {
         VBox parameterPane = new VBox();
         parameterPane.setStyle("-fx-padding: 50;");
-
-        MandelbrotGenerator generator = new MandelbrotGenerator();
 
         Label title = new Label("Fractal Generator");
         title.setStyle("-fx-font-size: 50");
@@ -58,7 +47,8 @@ public class ParameterPane {
 
         iterationSlider.setValue(iterationValue[0]);
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
-        iterationSlider.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
+        iterationSlider.setOnMouseReleased(e -> {mandelbrotGenerator.setIterations(iterationValue[0]);
+                                                 });
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);
@@ -80,9 +70,5 @@ public class ParameterPane {
         parameterPane.getChildren().add(generateButton);
 
         return parameterPane;
-    }
-
-    public int getIteration() {
-        return iterationValue[0];
     }
 }

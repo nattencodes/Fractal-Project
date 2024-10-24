@@ -1,7 +1,6 @@
 package com.example.fractal;
 
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -19,7 +18,7 @@ public class Main extends Application {
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();
         ParameterPane parameterPane = new ParameterPane();
-        HBox pains = new HBox(parameterPane.displayParamPane(generator), displayPane.displayThePain(generator));
+        HBox pains = new HBox(parameterPane.displayParamPane(), displayPane.displayThePain(generator));
         vbox1.getChildren().addAll(pains);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fractal Generator");

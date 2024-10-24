@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 public class ParameterPane {
     final int[] iterationValue = {200};
 
-    public VBox displayParamPane(MandelbrotGenerator mandelbrotGenerator) {
+    public VBox displayParamPane() {
         VBox parameterPane = new VBox();
         parameterPane.setStyle("-fx-padding: 50;");
 
@@ -50,8 +50,7 @@ public class ParameterPane {
 
         iterationSlider.setValue(iterationValue[0]);
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
-        iterationSlider.setOnMouseReleased(e -> {mandelbrotGenerator.setIterations(iterationValue[0]);
-                                                 });
+        iterationSlider.setOnMouseReleased(e -> System.out.println(iterationValue[0]));
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);

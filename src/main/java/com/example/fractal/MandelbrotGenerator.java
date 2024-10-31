@@ -14,23 +14,21 @@ public class MandelbrotGenerator {
     private int XOff = 300;
     private int YOff = 200;
 
-    public Group create(int iterations) {
-        StackPane rootPane = new StackPane();
-        rootPane.setStyle("-fx-background-color: green");
-        Group root = new Group(rootPane);
+    public void setXOff(int XOff) {
+        this.XOff = XOff;
+    }
 
+    public void setYOff(int YOff) {
+        this.YOff = YOff;
+    }
+
+    public Canvas create(int iterations) {
         Canvas canvas = new Canvas(400, 400);
         PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
 
-        canvas.setOnScroll(scrollEvent -> {
-            XOff = (int) scrollEvent.getX();
-            YOff = (int) scrollEvent.getY();
-        });
-
         drawSet(pw, 200, XOff, YOff, iterations);
-        rootPane.getChildren().add(canvas);
 
-        return root;
+        return canvas;
     }
 
     public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {

@@ -15,12 +15,12 @@ public class DisplayPane {
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
 
+        // Update mandelbrot set when iteration slider is moved
         final Group[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0])};
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
             {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
             displayPane.getChildren().set(0, mandelbrot[0]);});
-
 
         displayPane.getChildren().add(mandelbrot[0]);
         displayPane.setAlignment(Pos.CENTER);

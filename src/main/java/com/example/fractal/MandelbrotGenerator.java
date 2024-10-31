@@ -1,13 +1,18 @@
 package com.example.fractal;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
+
+    private int XOff = 300;
+    private int YOff = 200;
 
     public Group create(int iterations) {
         StackPane rootPane = new StackPane();
@@ -17,17 +22,22 @@ public class MandelbrotGenerator {
         Canvas canvas = new Canvas(400, 400);
         PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
 
-        drawSet(pw, 200, 300, 200, iterations);
+        canvas.setOnScroll(scrollEvent -> {
+            XOff = (int) scrollEvent.getX();
+            YOff = (int) scrollEvent.getY();
+        });
+
+        drawSet(pw, 200, XOff, YOff, iterations);
         rootPane.getChildren().add(canvas);
 
         return root;
     }
 
-    public void drawSet(PixelWriter pw, double zoom, int left, int right, int iterations) {
-        for (int x = -((int) left); x < 200; x++) {
-            for (int y = -200; y < 200; y++) {
+    public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
+        for (int x = -((int) XOff); x < 200; x++) {
+            for (int y = -YOff; y < YOff; y++) {
                 if (checkConvergence(x / zoom, y / zoom, iterations) == iterations) {
-                    pw.setColor(x + left, y + right, Color.HOTPINK);
+                    pw.setColor(x + XOff, y + YOff, Color.HOTPINK);
                 }
             }
         }

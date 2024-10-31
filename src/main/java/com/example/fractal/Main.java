@@ -14,11 +14,8 @@ public class Main extends Application {
         VBox vbox1 = new VBox();
         Scene scene = new Scene(vbox1);
 
-        MandelbrotGenerator generator = new MandelbrotGenerator();
-
         javafx.scene.control.MenuBar menuBar = new MenuBar(scene).make();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("light-mode.css")).toExternalForm());
-
 
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();
@@ -27,7 +24,7 @@ public class Main extends Application {
 
         Slider iterationSlider = makeParameterPane.getSlider();
 
-        HBox pains = new HBox(parameterPane, displayPane.displayThePain(generator, iterationSlider));
+        HBox pains = new HBox(parameterPane, displayPane.displayThePain(iterationSlider));
         vbox1.getChildren().addAll(pains);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fractal Generator");

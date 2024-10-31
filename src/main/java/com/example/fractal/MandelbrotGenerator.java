@@ -3,10 +3,12 @@ package com.example.fractal;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
+
     public Group create(int iterations) {
         StackPane rootPane = new StackPane();
         rootPane.setStyle("-fx-background-color: green");
@@ -21,11 +23,11 @@ public class MandelbrotGenerator {
         return root;
     }
 
-    public void drawSet(PixelWriter pw, double zoom, double left, double right, int iterations) {
+    public void drawSet(PixelWriter pw, double zoom, int left, int right, int iterations) {
         for (int x = -((int) left); x < 200; x++) {
             for (int y = -200; y < 200; y++) {
                 if (checkConvergence(x / zoom, y / zoom, iterations) == iterations) {
-                    pw.setColor(x + ((int) left), y + 200, Color.HOTPINK);
+                    pw.setColor(x + left, y + right, Color.HOTPINK);
                 }
             }
         }

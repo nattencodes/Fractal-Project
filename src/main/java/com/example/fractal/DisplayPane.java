@@ -8,17 +8,19 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.VBox;
 
 public class DisplayPane {
-    public VBox displayThePain(MandelbrotGenerator mandelbrotGenerator, Slider iterationSlider) {
+    public VBox displayThePain(Slider iterationSlider) {
         VBox displayPane = new VBox();
 
         int[] iterationValue = new int[]{200};
+
+        MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
 
         final Group[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0])};
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
             {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
-            System.out.println(iterationValue[0]);
             displayPane.getChildren().set(0, mandelbrot[0]);});
+
 
         displayPane.getChildren().add(mandelbrot[0]);
         displayPane.setAlignment(Pos.CENTER);

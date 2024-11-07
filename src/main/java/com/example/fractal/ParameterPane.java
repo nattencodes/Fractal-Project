@@ -57,15 +57,10 @@ public class ParameterPane {
 
         Slider iterationSlider = new Slider();
         iterationSlider.setMin(0);
-<<<<<<< HEAD
+
         iterationSlider.setMax(300);
         iterationSlider.setValue(50);
         setIterSlider(iterationSlider);
-=======
-        iterationSlider.setMax(200);
-        parameterPane.getChildren().add(iterationSlider);
-        setSlider(iterationSlider);
->>>>>>> 072316cdecede287a6cc0aaf76cd24abffe41d10
 
         iterationSlider.setValue(100);
 

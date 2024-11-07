@@ -18,8 +18,16 @@ public class MandelbrotGenerator {
         this.XOff = XOff;
     }
 
+    public int getXOff() {
+        return this.XOff;
+    }
+
     public void setYOff(int YOff) {
         this.YOff = YOff;
+    }
+
+    public int getYOff() {
+        return this.YOff;
     }
 
     public Canvas create(int iterations) {
@@ -32,8 +40,8 @@ public class MandelbrotGenerator {
     }
 
     public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
-        for (int x = -((int) XOff); x < 200; x++) {
-            for (int y = -YOff; y < YOff; y++) {
+        for (int x = -XOff; x < XOff+200; x++) {
+            for (int y = -YOff; y < YOff+200; y++) {
                 if (checkConvergence(x / zoom, y / zoom, iterations) == iterations) {
                     pw.setColor(x + XOff, y + YOff, Color.HOTPINK);
                 }

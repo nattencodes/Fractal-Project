@@ -23,19 +23,26 @@ public class DisplayPane {
         StackPane pane = new StackPane(mandelbrot[0]);
         pane.setBackground(Background.fill(Color.GREEN));
 
-        mandelbrot[0].setOnScroll(scrollEvent -> {
-            mandelbrotGenerator.setXOff((int) scrollEvent.getX());
-            mandelbrotGenerator.setYOff((int) scrollEvent.getY());
 
-            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
-            displayPane.getChildren().set(0, mandelbrot[0]);
+        final int[] initialX = {0};
+        final int[] initialY = {0};
+
+        final int[] finalX = {0};
+        final int[] finalY = {0};
+        pane.setOnDragDetected(e -> {
+            initialX[0] = (int) e.getX();
+            initialY[0] = (int) e.getX();
         });
+
+
 
         // Update mandelbrot set when iteration slider is moved
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
             {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
-            displayPane.getChildren().set(0, mandelbrot[0]);});
+                pane.getChildren().set(0, mandelbrot[0]);
+            displayPane.getChildren().set(0, pane);
+            });
 
 
         displayPane.getChildren().add(pane);

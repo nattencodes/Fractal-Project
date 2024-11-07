@@ -27,13 +27,18 @@ public class DisplayPane {
         AtomicReference<Color> colorr = new AtomicReference<>(Color.hsb(330, 1, 0.71));
         VBox displayPane = new VBox();
 
+<<<<<<< HEAD
         int[] iterationValue = new int[]{200};
         int[] hueValue = new int[]{200};
+=======
+        int[] iterationValue = new int[]{100};
+>>>>>>> 072316cdecede287a6cc0aaf76cd24abffe41d10
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
         final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], colorr.get())};
 
         StackPane pane = new StackPane(mandelbrot[0]);
+<<<<<<< HEAD
         //pane.setBackground(Background.fill(Color.GREEN));
 
 
@@ -52,6 +57,8 @@ public class DisplayPane {
             System.out.println(hueValue[0]);
             colorr.set(Color.hsb(hueValue[0], 1, 0.71, 1));
         });
+=======
+>>>>>>> 072316cdecede287a6cc0aaf76cd24abffe41d10
 
         // Update mandelbrot set when iteration slider is moved
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());

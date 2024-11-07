@@ -3,6 +3,7 @@ package com.example.fractal;
 import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 import java.util.Objects;
 
@@ -14,12 +15,15 @@ public class MenuBar {
         this.scene = scene;
         this.currentTheme = "light"; // Default theme
     }
+
     public javafx.scene.control.MenuBar make() {
         javafx.scene.control.MenuBar menuBar = new javafx.scene.control.MenuBar();
 
         Menu file = new Menu("File");
         MenuItem quit = new MenuItem("Quit");
+        quit.setOnAction(e -> System.exit(0));
         MenuItem newWindow = new MenuItem("New Window");
+        newWindow.setOnAction(e -> (new Main()).start(new Stage()));
         file.getItems().addAll(newWindow, quit);
 
         Menu options = new Menu("Options");

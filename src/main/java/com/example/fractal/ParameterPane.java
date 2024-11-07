@@ -51,12 +51,11 @@ public class ParameterPane {
 
         Slider iterationSlider = new Slider();
         iterationSlider.setMin(0);
-        iterationSlider.setMax(300);
-        iterationSlider.setValue(50);
+        iterationSlider.setMax(200);
         parameterPane.getChildren().add(iterationSlider);
         setSlider(iterationSlider);
 
-        iterationSlider.setValue(200);
+        iterationSlider.setValue(100);
 
         Label slider2title = new Label("Weirdness Factor");
         parameterPane.getChildren().add(slider2title);

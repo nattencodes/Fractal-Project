@@ -15,7 +15,7 @@ public class DisplayPane {
     public VBox displayThePain(Slider iterationSlider) {
         VBox displayPane = new VBox();
 
-        int[] iterationValue = new int[]{200};
+        int[] iterationValue = new int[]{100};
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
         final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0])};

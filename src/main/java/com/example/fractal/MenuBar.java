@@ -1,6 +1,7 @@
 package com.example.fractal;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
@@ -31,6 +32,19 @@ public class MenuBar {
         Menu theme = new Menu("Change Theme");
         MenuItem light = new MenuItem("Light");
         MenuItem dark = new MenuItem("Dark");
+
+        settings.setOnAction(e -> {
+            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
+            codeDialog.setTitle("Settings");
+            codeDialog.setHeight(350);
+            codeDialog.setWidth(500);
+            codeDialog.setHeaderText("Settings");
+            codeDialog.setContentText(
+                    """
+                            In construction. Come back soon :P """
+            );
+            codeDialog.show();
+        });
 
         light.setOnAction(e -> {
             if (!"light".equals(currentTheme)) { // Only switch if the current theme isn't light

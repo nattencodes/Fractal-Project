@@ -23,9 +23,10 @@ public class Main extends Application {
         ParameterPane makeParameterPane = new ParameterPane();
         VBox parameterPane = makeParameterPane.displayParamPane();
 
-        Slider iterationSlider = makeParameterPane.getSlider();
+        Slider iterationSlider = makeParameterPane.getIterSlider();
+        Slider hueSlider = makeParameterPane.getHueSlider();
 
-        HBox pains = new HBox(parameterPane, displayPane.displayThePain(primaryStage, iterationSlider));
+        HBox pains = new HBox(parameterPane, displayPane.displayThePain(primaryStage, iterationSlider, hueSlider));
         vbox1.getChildren().addAll(pains);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("iconforprog.jpg"))));
         primaryStage.setScene(scene);

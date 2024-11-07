@@ -2,16 +2,13 @@ package com.example.fractal;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
-import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -21,18 +18,20 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class DisplayPane {
-    public VBox displayThePain(Stage primaryStage, Slider iterationSlider) {
+    public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider hueSlider) {
+
+        AtomicReference<Color> colorr = new AtomicReference<>(Color.hsb(330, 1, 0.71));
         VBox displayPane = new VBox();
 
         int[] iterationValue = new int[]{200};
+        int[] hueValue = new int[]{200};
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
-        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0])};
+        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], colorr.get())};
 
         StackPane pane = new StackPane(mandelbrot[0]);
         //pane.setBackground(Background.fill(Color.GREEN));
@@ -48,12 +47,16 @@ public class DisplayPane {
             initialY[0] = (int) e.getX();
         });
 
-
+        hueSlider.valueProperty().addListener(e -> hueValue[0] = (int) hueSlider.getValue());
+        hueSlider.setOnMouseReleased(e -> {
+            System.out.println(hueValue[0]);
+            colorr.set(Color.hsb(hueValue[0], 1, 0.71, 1));
+        });
 
         // Update mandelbrot set when iteration slider is moved
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
-            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0]);
+            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], colorr.get());
                 pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
             });

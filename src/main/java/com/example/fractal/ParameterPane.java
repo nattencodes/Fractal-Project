@@ -6,13 +6,20 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class ParameterPane {
-    Slider slider;
-    private void setSlider(Slider slider) {
-        this.slider = slider;
+    Slider iterSlider;
+    Slider hueSlider;
+    private void setIterSlider(Slider slider) {
+        this.iterSlider = slider;
+    }
+    private void setHueSlider(Slider slider) {
+        this.hueSlider = slider;
     }
 
-    public Slider getSlider() {
-        return slider;
+    public Slider getIterSlider() {
+        return iterSlider;
+    }
+    public Slider getHueSlider() {
+        return hueSlider;
     }
 
     public VBox displayParamPane() {
@@ -47,26 +54,25 @@ public class ParameterPane {
         parameterPane.getChildren().add(whatsThis);
 
         Label slider1title = new Label("Iterations");
-        parameterPane.getChildren().add(slider1title);
 
         Slider iterationSlider = new Slider();
         iterationSlider.setMin(0);
         iterationSlider.setMax(300);
         iterationSlider.setValue(50);
-        parameterPane.getChildren().add(iterationSlider);
-        setSlider(iterationSlider);
+        setIterSlider(iterationSlider);
 
         iterationSlider.setValue(200);
 
-        Label slider2title = new Label("Weirdness Factor");
-        parameterPane.getChildren().add(slider2title);
+        Label slider2title = new Label("Hue");
 
-        Slider slider2 = new Slider();
-        slider2.setMin(0);
-        slider2.setMax(300);
-        slider2.setValue(50);
-        parameterPane.getChildren().add(slider2);
+        Slider hueSlider = new Slider();
+        hueSlider.setMin(0);
+        hueSlider.setMax(255);
+        hueSlider.setValue(50);
+        setHueSlider(hueSlider);
 
+
+        parameterPane.getChildren().addAll(slider1title, iterationSlider, slider2title, hueSlider);
         parameterPane.setAlignment(Pos.CENTER);
         parameterPane.setSpacing(10);
         parameterPane.setPadding(new Insets(10, 10, 10, 10));

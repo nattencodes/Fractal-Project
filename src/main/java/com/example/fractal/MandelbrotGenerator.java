@@ -30,20 +30,20 @@ public class MandelbrotGenerator {
         return this.YOff;
     }
 
-    public Canvas create(int iterations) {
+    public Canvas create(int iterations, Color color) {
         Canvas canvas = new Canvas(400, 400);
         PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
 
-        drawSet(pw, 200, XOff, YOff, iterations);
+        drawSet(pw, 200, XOff, YOff, iterations, color);
 
         return canvas;
     }
 
-    public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
+    public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations, Color color) {
         for (int x = -XOff; x < XOff+200; x++) {
             for (int y = -YOff; y < YOff+200; y++) {
                 if (checkConvergence(x / zoom, y / zoom, iterations) == iterations) {
-                    pw.setColor(x + XOff, y + YOff, Color.HOTPINK);
+                    pw.setColor(x + XOff, y + YOff, color);
                 }
             }
         }

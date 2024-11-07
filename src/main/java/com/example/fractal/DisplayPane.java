@@ -51,6 +51,9 @@ public class DisplayPane {
         hueSlider.setOnMouseReleased(e -> {
             System.out.println(hueValue[0]);
             colorr.set(Color.hsb(hueValue[0], 1, 0.71, 1));
+            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], colorr.get());
+            pane.getChildren().set(0, mandelbrot[0]);
+            displayPane.getChildren().set(0, pane);
         });
 
         // Update mandelbrot set when iteration slider is moved

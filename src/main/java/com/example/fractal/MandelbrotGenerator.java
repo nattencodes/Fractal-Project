@@ -1,12 +1,7 @@
 package com.example.fractal;
 
-import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelWriter;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
@@ -30,20 +25,24 @@ public class MandelbrotGenerator {
         return this.YOff;
     }
 
-    public Canvas create(int iterations, Color color) {
+    public Canvas create(int iterations, int WTFFactor) {
         Canvas canvas = new Canvas(400, 400);
         PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
 
-        drawSet(pw, 200, XOff, YOff, iterations, color);
+        drawSet(pw, 200, XOff, YOff, iterations);
 
         return canvas;
     }
 
-    public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations, Color color) {
+    public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
         for (int x = -XOff; x < XOff+200; x++) {
             for (int y = -YOff; y < YOff+200; y++) {
-                if (checkConvergence(x / zoom, y / zoom, iterations) == iterations) {
-                    pw.setColor(x + XOff, y + YOff, color);
+
+                double totalIterations = (checkConvergence(x / zoom, y / zoom, iterations));
+                if (totalIterations == iterations) {
+                    pw.setColor(x + XOff, y + YOff, Color.BLACK);
+                } else {
+                    pw.setColor(x + XOff, y + YOff, Color.hsb(totalIterations, 1, 1));
                 }
             }
         }

@@ -69,6 +69,17 @@ public class MenuBar {
 
         Menu help = new Menu("Help");
         MenuItem sendFeedback = new MenuItem("Send Feedback");
+        sendFeedback.setOnAction(e -> {
+            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
+            codeDialog.setTitle("Information on Fractals");
+            codeDialog.setHeight(350);
+            codeDialog.setWidth(500);
+            codeDialog.setHeaderText("Hello");
+            codeDialog.setContentText(
+                    "Bonjour"
+            );
+            codeDialog.show();
+        });
         MenuItem guide = new MenuItem("Guide");
         help.getItems().addAll(guide, sendFeedback);
 

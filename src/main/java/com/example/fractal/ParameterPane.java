@@ -76,13 +76,13 @@ public class ParameterPane {
 
         Slider hueSlider = new Slider();
         hueSlider.setMin(0);
-        hueSlider.setMax(1000);
+        hueSlider.setMax(5000);
         hueSlider.setValue(0);
         setHueSlider(hueSlider);
 
         Slider YMovSlider = new Slider();
         YMovSlider.setMin(0);
-        YMovSlider.setMax(1000);
+        YMovSlider.setMax(5000);
         YMovSlider.setValue(200);
         setYMovSlider(YMovSlider);
 

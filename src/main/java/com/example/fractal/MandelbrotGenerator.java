@@ -15,21 +15,22 @@ public class MandelbrotGenerator {
     }
 
     public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
-        System.out.println(-XOff + " " + -YOff);
-        for (int x = -XOff; x < XOff; x++) {
-            for (int y = -YOff; y < YOff; y++) {
+        double cx, cy;
+        for (int x = 0; x < 450; x++) {
+            for (int y = 0; y < 400; y++) {
+                cx = ((x - XOff) / zoom);
+                cy = ((y - YOff) / zoom);
+                int totalIterations = (checkConvergence(cx, cy, iterations));
 
-                int totalIterations = (checkConvergence(x / zoom, y / zoom, iterations));
-
-//                // grayscale coloring
+                // grayscale coloring
 //                double factor;
 //                int intensity;
 //                if (totalIterations == iterations) {
-//                    pw.setColor(x + XOff, y + YOff, Color.BLACK);
+//                    pw.setColor(x , y, Color.BLACK);
 //                } else {
 //                    factor = Math.sqrt((double) totalIterations / iterations);
 //                    intensity = (int) Math.round(255 * factor);
-//                    pw.setColor(x + XOff, y + YOff, Color.rgb(intensity, intensity, intensity));
+//                    pw.setColor(x, y, Color.rgb(intensity, intensity, intensity));
 //                }
 
                 // gradient 1 coloring
@@ -53,10 +54,10 @@ public class MandelbrotGenerator {
                 mapping[15] = Color.rgb(106, 52, 3);
 
                 if (totalIterations == iterations) {
-                    pw.setColor(x + XOff, y + YOff, Color.BLACK);
+                    pw.setColor(x, y, Color.BLACK);
                 } else {
                     i = totalIterations % 16;
-                    pw.setColor(x + XOff, y + YOff, mapping[i]);
+                    pw.setColor(x, y, mapping[i]);
                 }
             }
         }

@@ -6,13 +6,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
 public class ParameterPane {
-    Slider iterSlider;
-    Slider hueSlider;
+    private Slider iterSlider;
+    private Slider hueSlider;
+    private Slider YMovSlider;
+
     private void setIterSlider(Slider slider) {
         this.iterSlider = slider;
     }
     private void setHueSlider(Slider slider) {
         this.hueSlider = slider;
+    }
+    private void setYMovSlider(Slider slider) {
+        this.YMovSlider = slider;
     }
 
     public Slider getIterSlider() {
@@ -20,6 +25,9 @@ public class ParameterPane {
     }
     public Slider getHueSlider() {
         return hueSlider;
+    }
+    public Slider getYMovSlider() {
+        return YMovSlider;
     }
 
     public VBox displayParamPane() {
@@ -68,12 +76,17 @@ public class ParameterPane {
 
         Slider hueSlider = new Slider();
         hueSlider.setMin(0);
-        hueSlider.setMax(255);
-        hueSlider.setValue(50);
+        hueSlider.setMax(1000);
+        hueSlider.setValue(0);
         setHueSlider(hueSlider);
 
+        Slider YMovSlider = new Slider();
+        YMovSlider.setMin(0);
+        YMovSlider.setMax(1000);
+        YMovSlider.setValue(200);
+        setYMovSlider(YMovSlider);
 
-        parameterPane.getChildren().addAll(slider1title, iterationSlider, slider2title, hueSlider);
+        parameterPane.getChildren().addAll(slider1title, iterationSlider, slider2title, hueSlider, new Label("Move Y"), YMovSlider);
         parameterPane.setAlignment(Pos.CENTER);
         parameterPane.setSpacing(10);
         parameterPane.setPadding(new Insets(10, 10, 10, 10));

@@ -5,36 +5,17 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.paint.Color;
 
 public class MandelbrotGenerator {
-
-    private int XOff = 6000;
-    private int YOff = 200;
-
-    public void setXOff(int XOff) {
-        this.XOff = XOff;
-    }
-
-    public int getXOff() {
-        return this.XOff;
-    }
-
-    public void setYOff(int YOff) {
-        this.YOff = YOff;
-    }
-
-    public int getYOff() {
-        return this.YOff;
-    }
-
-    public Canvas create(int iterations, int WTFFactor) {
+    public Canvas create(int iterations, int zoom, int YMov) {
         Canvas canvas = new Canvas(450, 400);
         PixelWriter pw = canvas.getGraphicsContext2D().getPixelWriter();
-
-        drawSet(pw, 4000, XOff, YOff, iterations);
+        int XOff = 225;
+        drawSet(pw, zoom, XOff, YMov, iterations);
 
         return canvas;
     }
 
     public void drawSet(PixelWriter pw, double zoom, int XOff, int YOff, int iterations) {
+        System.out.println(-XOff + " " + -YOff);
         for (int x = -XOff; x < XOff; x++) {
             for (int y = -YOff; y < YOff; y++) {
 
@@ -46,7 +27,7 @@ public class MandelbrotGenerator {
 //                if (totalIterations == iterations) {
 //                    pw.setColor(x + XOff, y + YOff, Color.BLACK);
 //                } else {
-//                    factor = Math.sqrt(totalIterations / iterations);
+//                    factor = Math.sqrt((double) totalIterations / iterations);
 //                    intensity = (int) Math.round(255 * factor);
 //                    pw.setColor(x + XOff, y + YOff, Color.rgb(intensity, intensity, intensity));
 //                }

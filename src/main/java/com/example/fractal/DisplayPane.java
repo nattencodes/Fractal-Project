@@ -22,35 +22,25 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class DisplayPane {
-    public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider hueSlider) {
+    public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider hueSlider, Slider YMovSlider) {
 
         AtomicReference<Color> colorr = new AtomicReference<>(Color.hsb(330, 1, 0.71));
         VBox displayPane = new VBox();
 
         int[] iterationValue = new int[]{250};
-        int[] hueValue = new int[]{200};
+        int[] hueValue = new int[]{0};
+        int[] YMovValue = new int[]{200};
 
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
-        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], hueValue[0])};
+        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0])};
 
         StackPane pane = new StackPane(mandelbrot[0]);
-
-
-        final int[] initialX = {0};
-        final int[] initialY = {0};
-
-        final int[] finalX = {0};
-        final int[] finalY = {0};
-        pane.setOnDragDetected(e -> {
-            initialX[0] = (int) e.getX();
-            initialY[0] = (int) e.getX();
-        });
 
         hueSlider.valueProperty().addListener(e -> hueValue[0] = (int) hueSlider.getValue());
         hueSlider.setOnMouseReleased(e -> {
             colorr.set(Color.hsb(hueValue[0], 1, 0.71, 1));
-            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0]);
+            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
             pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
         });
@@ -58,10 +48,17 @@ public class DisplayPane {
         // Update mandelbrot set when iteration slider is moved
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
-            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0]);
+            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
                 pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
             });
+
+        YMovSlider.valueProperty().addListener(e -> YMovValue[0] = (int) YMovSlider.getValue());
+        YMovSlider.setOnMouseReleased(e ->
+        {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
+            pane.getChildren().set(0, mandelbrot[0]);
+            displayPane.getChildren().set(0, pane);
+        });
 
 
         displayPane.getChildren().add(pane);

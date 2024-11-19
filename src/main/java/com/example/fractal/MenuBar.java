@@ -71,12 +71,12 @@ public class MenuBar {
         MenuItem sendFeedback = new MenuItem("Send Feedback");
         sendFeedback.setOnAction(e -> {
             Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
-            codeDialog.setTitle("Information on Fractals");
+            codeDialog.setTitle("Send Feedback");
             codeDialog.setHeight(350);
             codeDialog.setWidth(500);
-            codeDialog.setHeaderText("Hello");
+            codeDialog.setHeaderText("We sincerely apologize.");
             codeDialog.setContentText(
-                    "Bonjour"
+                    "We currently do not accept feedback."
             );
             codeDialog.show();
         });

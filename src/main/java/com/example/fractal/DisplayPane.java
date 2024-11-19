@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Slider;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.PixelReader;
@@ -19,28 +20,38 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class DisplayPane {
-    public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider hueSlider, Slider YMovSlider) {
+    public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider zoomSlider, Slider YMovSlider, Slider XMovSlider) {
 
-        AtomicReference<Color> colorr = new AtomicReference<>(Color.hsb(330, 1, 0.71));
         VBox displayPane = new VBox();
 
         int[] iterationValue = new int[]{250};
-        int[] hueValue = new int[]{0};
+        int[] zoom = new int[]{150};
         int[] YMovValue = new int[]{200};
-
+        int[] XMovValue = new int[]{300};
+        String[] gradient = new String[]{"Grayscale"};
 
         MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
-        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0])};
+        final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0])};
 
         StackPane pane = new StackPane(mandelbrot[0]);
 
-        hueSlider.valueProperty().addListener(e -> hueValue[0] = (int) hueSlider.getValue());
-        hueSlider.setOnMouseReleased(e -> {
-            colorr.set(Color.hsb(hueValue[0], 1, 0.71, 1));
-            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
+        ComboBox<String> gradientChoice = new ComboBox<>();
+        gradientChoice.setValue("Grayscale");
+        gradientChoice.getItems().add("Grayscale");
+        gradientChoice.getItems().add("Tropical");
+
+        gradientChoice.setOnAction(e -> {
+            gradient[0] = gradientChoice.getValue();
+            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0]);
+            pane.getChildren().set(0, mandelbrot[0]);
+            displayPane.getChildren().set(0, pane);
+        });
+
+        zoomSlider.valueProperty().addListener(e -> zoom[0] = (int) zoomSlider.getValue());
+        zoomSlider.setOnMouseReleased(e -> {
+            mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0]);
             pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
         });
@@ -48,17 +59,25 @@ public class DisplayPane {
         // Update mandelbrot set when iteration slider is moved
         iterationSlider.valueProperty().addListener(e -> iterationValue[0] = (int) iterationSlider.getValue());
         iterationSlider.setOnMouseReleased(e ->
-            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
+            {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0]);
                 pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
             });
 
         YMovSlider.valueProperty().addListener(e -> YMovValue[0] = (int) YMovSlider.getValue());
         YMovSlider.setOnMouseReleased(e ->
-        {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], hueValue[0], YMovValue[0]);
+        {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0]);
             pane.getChildren().set(0, mandelbrot[0]);
             displayPane.getChildren().set(0, pane);
         });
+
+        XMovSlider.valueProperty().addListener(e -> XMovValue[0] = (int) XMovSlider.getValue());
+        XMovSlider.setOnMouseReleased(e ->
+        {mandelbrot[0] = mandelbrotGenerator.create(iterationValue[0], zoom[0], YMovValue[0], XMovValue[0], gradient[0]);
+            pane.getChildren().set(0, mandelbrot[0]);
+            displayPane.getChildren().set(0, pane);
+        });
+
 
 
         displayPane.getChildren().add(pane);
@@ -77,7 +96,7 @@ public class DisplayPane {
         });
         button.setLayoutX(100);
         button.setLayoutY(300);
-        displayPane.getChildren().add(button);
+        displayPane.getChildren().addAll(button, gradientChoice);
 
         return displayPane;
     }

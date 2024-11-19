@@ -7,27 +7,34 @@ import javafx.scene.layout.VBox;
 
 public class ParameterPane {
     private Slider iterSlider;
-    private Slider hueSlider;
+    private Slider zoomSlider;
     private Slider YMovSlider;
+    private Slider XMovSlider;
 
     private void setIterSlider(Slider slider) {
         this.iterSlider = slider;
     }
-    private void setHueSlider(Slider slider) {
-        this.hueSlider = slider;
+    private void setZoomSlider(Slider slider) {
+        this.zoomSlider = slider;
     }
     private void setYMovSlider(Slider slider) {
         this.YMovSlider = slider;
+    }
+    private void setXMovSlider(Slider slider) {
+        this.XMovSlider = slider;
     }
 
     public Slider getIterSlider() {
         return iterSlider;
     }
-    public Slider getHueSlider() {
-        return hueSlider;
+    public Slider getZoomSlider() {
+        return zoomSlider;
     }
     public Slider getYMovSlider() {
         return YMovSlider;
+    }
+    public Slider getXMovSlider() {
+        return XMovSlider;
     }
 
     public VBox displayParamPane() {
@@ -72,13 +79,13 @@ public class ParameterPane {
 
         iterationSlider.setValue(100);
 
-        Label slider2title = new Label("Hue");
+        Label slider2title = new Label("Zoom");
 
-        Slider hueSlider = new Slider();
-        hueSlider.setMin(0);
-        hueSlider.setMax(5000);
-        hueSlider.setValue(0);
-        setHueSlider(hueSlider);
+        Slider zoomSlider = new Slider();
+        zoomSlider.setMin(0);
+        zoomSlider.setMax(5000);
+        zoomSlider.setValue(0);
+        setZoomSlider(zoomSlider);
 
         Slider YMovSlider = new Slider();
         YMovSlider.setMin(0);
@@ -86,7 +93,13 @@ public class ParameterPane {
         YMovSlider.setValue(200);
         setYMovSlider(YMovSlider);
 
-        parameterPane.getChildren().addAll(slider1title, iterationSlider, slider2title, hueSlider, new Label("Move Y"), YMovSlider);
+        Slider XMovSlider = new Slider();
+        XMovSlider.setMin(0);
+        XMovSlider.setMax(8000);
+        XMovSlider.setValue(300);
+        setXMovSlider(XMovSlider);
+
+        parameterPane.getChildren().addAll(slider1title, iterationSlider, slider2title, zoomSlider, new Label("Move Y"), YMovSlider, new Label("Move X"), XMovSlider);
         parameterPane.setAlignment(Pos.CENTER);
         parameterPane.setSpacing(10);
         parameterPane.setPadding(new Insets(10, 10, 10, 10));

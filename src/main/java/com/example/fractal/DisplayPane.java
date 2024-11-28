@@ -31,7 +31,10 @@ public class DisplayPane {
         int[] hueValue = new int[]{200};
 
 
-        MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
+        //MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
+        //final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], colorr.get())};
+
+        JuliaGenerator mandelbrotGenerator = new JuliaGenerator();
         final Canvas[] mandelbrot = {mandelbrotGenerator.create(iterationValue[0], colorr.get())};
 
         StackPane pane = new StackPane(mandelbrot[0]);

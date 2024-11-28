@@ -1,13 +1,22 @@
 package com.example.fractal;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+
+import java.util.Objects;
 
 public class ParameterPane {
     Slider iterSlider;
     Slider hueSlider;
+    JuliaGenerator julia = new JuliaGenerator();
+    MandelbrotGenerator mandel = new MandelbrotGenerator();
+
     private void setIterSlider(Slider slider) {
         this.iterSlider = slider;
     }
@@ -21,6 +30,12 @@ public class ParameterPane {
     public Slider getHueSlider() {
         return hueSlider;
     }
+    public JuliaGenerator getJuliaGenerator() {
+        return julia;
+    }
+    public MandelbrotGenerator getMandelbrotGenerator() {
+        return mandel;
+    }
 
     public VBox displayParamPane() {
         VBox parameterPane = new VBox();
@@ -31,7 +46,7 @@ public class ParameterPane {
         title.setAlignment(Pos.TOP_LEFT);
         parameterPane.getChildren().add(title);
 
-        String textClick = "What is a Mandelbrot Fractal?";
+        String textClick = "What is a Fractal?";
 
         Label whatsThis = new Label(textClick);
         whatsThis.setStyle("-fx-underline: true;");
@@ -51,7 +66,37 @@ public class ParameterPane {
             );
             codeDialog.show();
         });
-        parameterPane.getChildren().add(whatsThis);
+
+        final ToggleGroup group = new ToggleGroup();
+
+        RadioButton rb1 = new RadioButton("Julia Set");
+        rb1.setToggleGroup(group);
+        rb1.setSelected(true);
+
+        RadioButton rb2 = new RadioButton("Mandelbrot Set");
+        rb2.setToggleGroup(group);
+        rb2.setPadding(new Insets(0,0,20,0));
+
+        parameterPane.getChildren().addAll(rb1, rb2, whatsThis);
+
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                if (group.getSelectedToggle().getUserData() != null) {
+                    System.out.println("Selected Radio Button is " + group.getUserData().toString());
+                    System.out.println(group.getSelectedToggle().toString());
+                } else {
+                    System.out.println("Selected Radio Button is null");
+                    String thingy = group.getSelectedToggle().toString();
+                    String soup = thingy.substring(46,(thingy.length()-4));
+                    if (soup.length()<9) {
+                        System.out.println("Julia");
+                    } else {
+                        System.out.println("Mandelbrot");
+                    }
+                }
+            }
+        });
+
 
         Label slider1title = new Label("Iterations");
 

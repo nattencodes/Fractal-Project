@@ -85,7 +85,7 @@ public class DisplayPane {
         displayPane.setSpacing(10);
         displayPane.setPadding(new Insets(10, 10, 10, 10));
 
-        Button button = new Button("download");
+        Button button = new Button("Download");
 
         button.setOnAction(e -> {
             try {

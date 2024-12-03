@@ -16,7 +16,7 @@ public class MenuBar {
     public MenuBar(Scene scene) {
         this.scene = scene;
         this.currentTheme = "light"; // Default theme
-        this.currentFont = "Comic Sans";
+        this.currentFont = "Monospace";
     }
 
     public javafx.scene.control.MenuBar make() {
@@ -30,9 +30,9 @@ public class MenuBar {
         file.getItems().addAll(newWindow, quit);
 
         Menu options = new Menu("Options");
-        Menu font = new Menu("font");
+        Menu font = new Menu("Font");
         MenuItem comicSans = new MenuItem("Comic Sans");
-        MenuItem def = new MenuItem("def");
+        MenuItem monospace = new MenuItem("Monospace");
         Menu theme = new Menu("Change Theme");
         MenuItem light = new MenuItem("Light");
         MenuItem dark = new MenuItem("Dark");
@@ -55,8 +55,24 @@ public class MenuBar {
             }
         });
 
+        comicSans.setOnAction(e -> {
+            if (!"Comic Sans".equals(currentFont)) {
+                scene.getStylesheets().remove(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("comic-sans.css")).toExternalForm());
+                currentFont = "Comic Sans"; // Update the current theme
+            }
+        });
+
+        monospace.setOnAction(e -> {
+            if (!"Monospace".equals(currentFont)) {
+                scene.getStylesheets().remove(Objects.requireNonNull(getClass().getResource("comic-sans.css")).toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
+                currentFont = "Monospace";
+            }
+        });
+
         theme.getItems().addAll(light, dark);
-        font.getItems().addAll(comicSans, def);
+        font.getItems().addAll(comicSans, monospace);
 
         options.getItems().addAll(theme, font);
 

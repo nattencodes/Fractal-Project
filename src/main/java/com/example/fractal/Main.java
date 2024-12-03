@@ -13,10 +13,12 @@ import java.util.Objects;
 public class Main extends Application {
     public void start(Stage primaryStage) {
         VBox vbox1 = new VBox();
-        Scene scene = new Scene(vbox1);
+        Scene scene = new Scene(vbox1, 1000, 550);
+
 
         javafx.scene.control.MenuBar menuBar = new MenuBar(scene).make();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("light-mode.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
 
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();

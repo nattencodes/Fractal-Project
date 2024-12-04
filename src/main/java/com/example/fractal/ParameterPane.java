@@ -38,29 +38,6 @@ public class ParameterPane {
         title.setAlignment(Pos.TOP_LEFT);
         parameterPane.getChildren().add(title);
 
-        final ToggleGroup group = new ToggleGroup();
-
-        RadioButton rb1 = new RadioButton("Julia Set");
-        rb1.setToggleGroup(group);
-        rb1.setSelected(true); // Default selection
-        rb1.setUserData(new JuliaGenerator());
-
-        RadioButton rb2 = new RadioButton("Mandelbrot Set");
-        rb2.setToggleGroup(group);
-        rb2.setUserData(new MandelbrotGenerator());
-        rb2.setPadding(new Insets(0, 0, 20, 0));
-
-        // Listen for selection changes
-        group.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
-            if (newToggle != null) {
-                selectedGenerator = newToggle.getUserData();
-                System.out.println("Switched to: " +
-                        (selectedGenerator instanceof JuliaGenerator ? "Julia Set" : "Mandelbrot Set"));
-            }
-        });
-
-        parameterPane.getChildren().addAll(rb1, rb2);
-
         Label slider1title = new Label("Iterations");
         iterSlider = new Slider(1, 300, 100); // Default slider values
         parameterPane.getChildren().addAll(slider1title, iterSlider);

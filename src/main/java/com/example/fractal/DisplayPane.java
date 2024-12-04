@@ -21,8 +21,8 @@ import java.io.IOException;
 public class DisplayPane {
     private final MandelbrotGenerator mandelbrotGenerator = new MandelbrotGenerator();
     private final JuliaGenerator juliaGenerator = new JuliaGenerator();
-    private boolean isMandelbrot = true; // Tracks the current generator
-    private Canvas currentCanvas; // Holds the currently displayed canvas
+    private boolean isMandelbrot = true;
+    private Canvas currentCanvas;
 
     public VBox displayThePain(Stage primaryStage, Slider iterationSlider, Slider hueSlider, ParameterPane parameterPane) {
         VBox displayPane = new VBox();
@@ -65,7 +65,6 @@ public class DisplayPane {
             }
         });
 
-        // Assemble the UI
         displayPane.getChildren().addAll(canvasPane, toggleGeneratorButton, saveButton);
         displayPane.setAlignment(Pos.CENTER);
         displayPane.setSpacing(10);
@@ -75,7 +74,6 @@ public class DisplayPane {
     }
 
     private void updateCanvas(int iterations, double hue, int XMov, int YMov, int zoom, String gradient, StackPane canvasPane) {
-        // Generate the correct fractal and replace the canvas
         Canvas newCanvas;
         if (isMandelbrot) {
             newCanvas = mandelbrotGenerator.create(iterations, zoom, YMov, XMov, gradient);

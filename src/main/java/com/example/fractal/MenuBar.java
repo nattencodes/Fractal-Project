@@ -11,10 +11,12 @@ import java.util.Objects;
 public class MenuBar {
     private String currentTheme;
     private Scene scene;
+    private String currentFont;
 
     public MenuBar(Scene scene) {
         this.scene = scene;
         this.currentTheme = "light"; // Default theme
+        this.currentFont = "Monospace";
     }
 
     public javafx.scene.control.MenuBar make() {
@@ -28,23 +30,13 @@ public class MenuBar {
         file.getItems().addAll(newWindow, quit);
 
         Menu options = new Menu("Options");
-        MenuItem settings = new MenuItem("Settings");
+        Menu font = new Menu("Font");
+        MenuItem comicSans = new MenuItem("Comic Sans");
+        MenuItem monospace = new MenuItem("Monospace");
         Menu theme = new Menu("Change Theme");
         MenuItem light = new MenuItem("Light");
         MenuItem dark = new MenuItem("Dark");
 
-        settings.setOnAction(e -> {
-            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
-            codeDialog.setTitle("Settings");
-            codeDialog.setHeight(350);
-            codeDialog.setWidth(500);
-            codeDialog.setHeaderText("Settings");
-            codeDialog.setContentText(
-                    """
-                            In construction. Come back soon :P """
-            );
-            codeDialog.show();
-        });
 
         light.setOnAction(e -> {
             if (!"light".equals(currentTheme)) { // Only switch if the current theme isn't light
@@ -63,13 +55,56 @@ public class MenuBar {
             }
         });
 
-        theme.getItems().addAll(light, dark);
+        comicSans.setOnAction(e -> {
+            if (!"Comic Sans".equals(currentFont)) {
+                scene.getStylesheets().remove(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("comic-sans.css")).toExternalForm());
+                currentFont = "Comic Sans"; // Update the current theme
+            }
+        });
 
-        options.getItems().addAll(settings, theme);
+        monospace.setOnAction(e -> {
+            if (!"Monospace".equals(currentFont)) {
+                scene.getStylesheets().remove(Objects.requireNonNull(getClass().getResource("comic-sans.css")).toExternalForm());
+                scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
+                currentFont = "Monospace";
+            }
+        });
+
+        theme.getItems().addAll(light, dark);
+        font.getItems().addAll(comicSans, monospace);
+
+        options.getItems().addAll(theme, font);
 
         Menu help = new Menu("Help");
         MenuItem sendFeedback = new MenuItem("Send Feedback");
+        sendFeedback.setOnAction(e -> {
+            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
+            codeDialog.setTitle("Send Feedback");
+            codeDialog.setHeight(350);
+            codeDialog.setWidth(500);
+            codeDialog.setHeaderText("We sincerely apologize.");
+            codeDialog.setContentText(
+                    "We currently do not accept feedback."
+            );
+            codeDialog.show();
+        });
         MenuItem guide = new MenuItem("Guide");
+        guide.setOnAction(e -> {
+            Alert codeDialog = new Alert(Alert.AlertType.INFORMATION);
+            codeDialog.setTitle("Simple Guide");
+            codeDialog.setHeight(350);
+            codeDialog.setWidth(500);
+            codeDialog.setHeaderText("How to make it work");
+            codeDialog.setContentText(
+                    "First, the iteration slider controls how \"detailed\" the fractal is. The higher the value, the more time the image will take to render. Default value is 250.\n" +
+                            "Next, the zoom slider, as its name indicates, serves to zoom into the image.\n" +
+                            "Finally, the X and Y slider control the panning in the X and Y axis.\n" +
+                            "As an addition, you can change the gradient of the fractal in the bottom right corner.\n" +
+                            "When you are satisfied, you can save a .png file of the fractal using the download button."
+            );
+            codeDialog.show();
+        });
         help.getItems().addAll(guide, sendFeedback);
 
         menuBar.getMenus().addAll(file, options, help);

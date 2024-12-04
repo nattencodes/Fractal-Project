@@ -13,10 +13,12 @@ import java.util.Objects;
 public class Main extends Application {
     public void start(Stage primaryStage) {
         VBox vbox1 = new VBox();
-        Scene scene = new Scene(vbox1);
+        Scene scene = new Scene(vbox1, 1000, 550);
+
 
         javafx.scene.control.MenuBar menuBar = new MenuBar(scene).make();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("light-mode.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
 
         vbox1.getChildren().addAll(menuBar);
         DisplayPane displayPane = new DisplayPane();
@@ -24,9 +26,11 @@ public class Main extends Application {
         VBox parameterPane = makeParameterPane.displayParamPane();
 
         Slider iterationSlider = makeParameterPane.getIterSlider();
-        Slider hueSlider = makeParameterPane.getHueSlider();
+        Slider zoomSlider = makeParameterPane.getZoomSlider();
+        Slider YMovSlider = makeParameterPane.getYMovSlider();
+        Slider XMovSlider = makeParameterPane.getXMovSlider();
 
-        HBox pains = new HBox(parameterPane, displayPane.displayThePain(primaryStage, iterationSlider, hueSlider));
+        HBox pains = new HBox(parameterPane, displayPane.displayThePain(primaryStage, iterationSlider, zoomSlider, YMovSlider, XMovSlider));
         vbox1.getChildren().addAll(pains);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("iconforprog.jpg"))));
         primaryStage.setScene(scene);

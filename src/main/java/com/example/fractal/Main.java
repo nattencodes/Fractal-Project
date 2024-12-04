@@ -13,25 +13,24 @@ import java.util.Objects;
 public class Main extends Application {
     public void start(Stage primaryStage) {
         VBox vbox1 = new VBox();
-        Scene scene = new Scene(vbox1, 1000, 550);
-
+        Scene scene = new Scene(vbox1);
 
         javafx.scene.control.MenuBar menuBar = new MenuBar(scene).make();
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("light-mode.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("monospace.css")).toExternalForm());
-
         vbox1.getChildren().addAll(menuBar);
+
+        ParameterPane parameterPane = new ParameterPane();
+        VBox paramPane = parameterPane.displayParamPane();
+
+        Slider iterationSlider = parameterPane.getIterSlider();
+        Slider hueSlider = parameterPane.getHueSlider();
+
         DisplayPane displayPane = new DisplayPane();
-        ParameterPane makeParameterPane = new ParameterPane();
-        VBox parameterPane = makeParameterPane.displayParamPane();
+        VBox display = displayPane.displayThePain(primaryStage, iterationSlider, hueSlider, parameterPane);
 
-        Slider iterationSlider = makeParameterPane.getIterSlider();
-        Slider zoomSlider = makeParameterPane.getZoomSlider();
-        Slider YMovSlider = makeParameterPane.getYMovSlider();
-        Slider XMovSlider = makeParameterPane.getXMovSlider();
+        HBox pains = new HBox(paramPane, display);
+        vbox1.getChildren().add(pains);
 
-        HBox pains = new HBox(parameterPane, displayPane.displayThePain(primaryStage, iterationSlider, zoomSlider, YMovSlider, XMovSlider));
-        vbox1.getChildren().addAll(pains);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("iconforprog.jpg"))));
         primaryStage.setScene(scene);
         primaryStage.setTitle("Fractal Generator");

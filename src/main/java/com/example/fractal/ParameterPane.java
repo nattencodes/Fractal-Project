@@ -36,6 +36,13 @@ public class ParameterPane {
     public MandelbrotGenerator getMandelbrotGenerator() {
         return mandel;
     }
+    public Object whichGenerator(String generator) {
+        if (generator.equals("Julia")) {
+            return julia;
+        } else {
+            return mandel;
+        }
+    }
 
     public VBox displayParamPane() {
         VBox parameterPane = new VBox();
@@ -85,7 +92,6 @@ public class ParameterPane {
                     System.out.println("Selected Radio Button is " + group.getUserData().toString());
                     System.out.println(group.getSelectedToggle().toString());
                 } else {
-                    System.out.println("Selected Radio Button is null");
                     String thingy = group.getSelectedToggle().toString();
                     String soup = thingy.substring(46,(thingy.length()-4));
                     if (soup.length()<9) {

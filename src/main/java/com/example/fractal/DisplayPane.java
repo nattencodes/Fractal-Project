@@ -52,7 +52,7 @@ public class DisplayPane {
         Button toggleGeneratorButton = new Button("Switch Generator");
         toggleGeneratorButton.setOnAction(e -> {
             isMandelbrot = !isMandelbrot;
-            System.out.println("Switched to " + (isMandelbrot ? "Mandelbrot" : "Julia") + " Generator");
+            //System.out.println("Switched to " + (isMandelbrot ? "Mandelbrot" : "Julia") + " Generator");
             updateCanvas(iterationValue[0], hueSlider.getValue(), XMov, YMov, zoom, gradient, canvasPane);
         });
 
@@ -81,9 +81,9 @@ public class DisplayPane {
             newCanvas = juliaGenerator.create(iterations, Color.hsb(hue, 1, 1));
         }
 
-        System.out.println("Updating canvas with " + (isMandelbrot ? "Mandelbrot" : "Julia") + " generator");
-        canvasPane.getChildren().setAll(newCanvas); // Replace the canvas in the StackPane
-        currentCanvas = newCanvas; // Update the reference to the current canvas
+        //System.out.println("Updating canvas with " + (isMandelbrot ? "Mandelbrot" : "Julia") + " generator");
+        canvasPane.getChildren().setAll(newCanvas);
+        currentCanvas = newCanvas;
     }
 
     private void saveImage(Stage primaryStage, Canvas canvas) throws IOException {
